@@ -1,0 +1,55 @@
+{% set name = "gluonts" %}
+{% set version = "0.8.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9f6be7eb67f951c22beb3d259a7c3ec1f17e6acfbdb2d0df9a4871383b2a1231
+
+build:
+  skip: True      # [py<36]
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - holidays >=0.9
+    - matplotlib ~=3.0
+    - numpy ~=1.16
+    - pandas ~=1.0
+    - pydantic ~=1.1
+    - tqdm ~=4.23
+    - toolz ~=0.10
+    - typing-extensions ~=3.10.0.0
+
+test:
+  imports:
+    - gluonts
+  requires:
+    - pip
+  commands:
+    - pip check
+
+about:
+  home: https://github.com/awslabs/gluon-ts
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE
+  doc_url: https://github.com/awslabs/gluon-ts
+  dev_url: https://ts.gluon.ai/
+  summary: GluonTS is a Python toolkit for probabilistic time series modeling, built around Apache MXNet (incubating).
+  description: GluonTS provides utilities for loading and iterating over time series datasets, state of the art models ready to be trained, and building blocks to define your own models and quickly experiment with different solutions.
+
+extra:
+  recipe-maintainers:
+    - dkomisar
