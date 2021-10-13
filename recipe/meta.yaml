@@ -41,12 +41,12 @@ test:
     - pip check
 
 about:
-  home: https://github.com/awslabs/gluon-ts
+  home: https://ts.gluon.ai/
   license: Apache 2.0
   license_family: Apache
   license_file: LICENSE
-  doc_url: https://github.com/awslabs/gluon-ts
-  dev_url: https://ts.gluon.ai/
+  dev_url: https://github.com/awslabs/gluon-ts
+  doc_url: https://ts.gluon.ai/api/gluonts/gluonts.html
   summary: GluonTS is a Python toolkit for probabilistic time series modeling, built around Apache MXNet (incubating).
   description: GluonTS provides utilities for loading and iterating over time series datasets, state of the art models ready to be trained, and building blocks to define your own models and quickly experiment with different solutions.
 
