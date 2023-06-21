@@ -29,7 +29,7 @@ requirements:
     - toolz >=0.10,<1
     - typing-extensions >=4.0,<5  # [py<38]
     # optional deps
-    - pytorch
+    - pytorch >=1.9,<3
     - pytorch-lightning >=1.5,<3
     - protobuf
     - scipy >=1.10,<1.11
@@ -41,16 +41,8 @@ test:
     - test
   requires:
     - pip
-    - pytest
-    - pyarrow  # [not s390x]
-    - statsmodels
-    - flaky
-    - matplotlib-base
   commands:
     - pip check
-    # Skip `test_dataclass_subtype` because of pydantic version incompatibility https://github.com/awslabs/gluonts/issues/1531
-    # Skip tests (test_estimators.py, test_modules.py, test_mqf2_modules.py) that require cpflows
-    - pytest . -v -k "not test_dataclass_subtype" --ignore=test/torch/model/test_estimators.py --ignore=test/torch/model/test_modules.py --ignore=test/torch/model/test_mqf2_modules.py
 
 about:
   home: https://ts.gluon.ai/stable/
