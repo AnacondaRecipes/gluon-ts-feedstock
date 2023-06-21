@@ -29,7 +29,7 @@ requirements:
     - toolz >=0.10,<1
     - typing-extensions >=4.0,<5  # [py<38]
     # optional deps
-    - pytorch >=1.9,<3
+    - pytorch
     - pytorch-lightning >=1.5,<3
     - protobuf
     - scipy >=1.10,<1.11
@@ -42,7 +42,7 @@ test:
   requires:
     - pip
     - pytest
-    - pyarrow
+    - pyarrow  # [not s390x]
     - statsmodels
     - flaky
     - matplotlib-base
@@ -56,7 +56,9 @@ about:
   home: https://ts.gluon.ai/stable/
   license: Apache-2.0
   license_family: Apache
-  license_file: LICENSE
+  license_file:
+    - NOTICE
+    - LICENSE
   dev_url: https://github.com/awslabs/gluonts
   doc_url: https://ts.gluon.ai/stable/index.html
   summary: GluonTS is a Python toolkit for probabilistic time series modeling, built around Apache MXNet (incubating).
