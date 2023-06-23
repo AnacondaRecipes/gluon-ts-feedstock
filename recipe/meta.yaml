@@ -11,8 +11,8 @@ source:
 
 build:
   number: 0
-  # Skip py>310 because pytorch-lightning 1.9.5 is not available for py311. Remove it with a new release.
-  skip: True  # [py<37 or py>310 or s390x]
+  # skipping py311 for and linux-ppc64le because for now dep pytorch is not supported on such platform
+  skip: True  # [py<37 or (py>310 and (linux and ppc64le)) or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
