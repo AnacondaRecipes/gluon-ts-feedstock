@@ -1,5 +1,5 @@
 {% set name = "gluonts" %}
-{% set version = "0.13.2" %}
+{% set version = "0.14.3" %}
 
 package:
   name: {{ name }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5c6a2c963a9e1eeedeb148c24599eddd3fbc79a32e2ec43f9b2df422b125c9c4
+  sha256: 955602c7853fc4b252451360848f58542df830fe89c10d38473c4d2000bd9993
 
 build:
   number: 0
   # skipping py311 for and linux-ppc64le because for now dep pytorch is not supported on such platform
-  skip: True  # [py<37 or (py>310 and (linux and ppc64le)) or s390x]
+  skip: true  # [py<37 or (py>310 and (linux and ppc64le)) or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
@@ -25,15 +25,20 @@ requirements:
     - python
     - numpy >=1.16,<2
     - pandas >=1.0,<3
-    - pydantic >=1.7,<2
+    - pydantic >=1.7,<3
     - tqdm >=4.23,<5
     - toolz >=0.10,<1
     - typing-extensions >=4.0,<5  # [py<38]
-    # optional deps
+    # Optional dependencies that are part of the "torch" extra, 
+    # but the gluonts package we have on defaults right now includes 
+    # the "torch" extra by default in the runtime requirements. So we
+    # can't remove that dependency without breaking all our users.
     - pytorch >=1.9,<3
-    - pytorch-lightning >=1.5,<3
-    - protobuf
-    - scipy >=1.10,<2
+    - lightning >=2.0,<2.2
+    # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
+    - pytorch-lightning >=2.0,<2.2
+    - scipy >=1.7.3,<2  # [py<38]
+    - scipy >=1.10,<2   # [py>37]
 
 test:
   imports:
