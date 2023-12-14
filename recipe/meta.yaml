@@ -11,8 +11,8 @@ source:
 
 build:
   number: 0
-  # skipping py311 for and linux-ppc64le because for now dep pytorch is not supported on such platform
-  skip: true  # [py<37 or (py>310 and (linux and ppc64le)) or s390x]
+  # skipping py311 for s390x because lightning is not available
+  skip: true  # [py<37 or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
