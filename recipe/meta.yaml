@@ -1,5 +1,5 @@
 {% set name = "gluonts" %}
-{% set version = "0.14.3" %}
+{% set version = "0.15.1" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 955602c7853fc4b252451360848f58542df830fe89c10d38473c4d2000bd9993
+  sha256: af1a12b9f22f8db071f31da518a9c61f1539b0036d857826c88091032bb9a845
 
 build:
   number: 0
@@ -38,7 +38,7 @@ requirements:
     # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
     - pytorch-lightning >=2.0,<2.2
     - scipy >=1.7.3,<1.8  # [py<38]
-    - scipy >=1.10,<1.11  # [py>37]
+    - scipy >=1.10,<2     # [py>37]
 
 test:
   imports:
@@ -56,7 +56,7 @@ about:
     - NOTICE
     - LICENSE
   dev_url: https://github.com/awslabs/gluonts
-  doc_url: https://ts.gluon.ai/stable/index.html
+  doc_url: https://ts.gluon.ai/stable/
   summary: GluonTS is a Python toolkit for probabilistic time series modeling, built around Apache MXNet (incubating).
   description: GluonTS is a Python package for probabilistic time series modeling, focusing on deep learning based models, based on PyTorch and MXNet.
 
