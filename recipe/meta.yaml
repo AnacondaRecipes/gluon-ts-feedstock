@@ -8,6 +8,9 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: af1a12b9f22f8db071f31da518a9c61f1539b0036d857826c88091032bb9a845
+  patches:
+    # remove test cases that rely on cpflows extra
+    - patches/0001-remove-mqf2-cpflows-tests-in-torch.patch
 
 build:
   number: 0
@@ -16,6 +19,9 @@ build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - python
     - pip
@@ -36,17 +42,38 @@ requirements:
     - pytorch >=1.9,<3
     - lightning >=2.0,<2.2
     # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
-    - pytorch-lightning >=2.0,<2.2
+    # Relax upperbound to match autogluon-timeseries
+    - pytorch-lightning >=2.0,<2.4
     - scipy >=1.7.3,<1.8  # [py<38]
     - scipy >=1.10,<2     # [py>37]
 
 test:
+  source_files:
+    - test/torch
   imports:
     - gluonts
   requires:
     - pip
+    - pytest
+    - pandas >=1.1
+    - pytest >7.0
+    - pytest-cov >4.0,<5.0
+    - pytest-timeout >2.0, <3.0
+    - pytest-xdist >3.0, <4.0
+    - pytest-rerunfailures >=12.0, <14.0
+    - ujson
+    - orjson
+    - requests
+    - holidays >=0.9,<1
+    - matplotlib >=3.6,<4
   commands:
     - pip check
+    ## Torch tests to check pytorch-lightning bounds are OK ##
+    # MPS Fallback must be enabled on OSX, see https://github.com/awslabs/gluonts/issues/3020
+    - export PYTORCH_ENABLE_MPS_FALLBACK=1  # [osx]
+    # Rename torch test directory to avoid confusion with torch module
+    - mv test/torch torch_tests
+    - pytest torch_tests -vv
 
 about:
   home: https://ts.gluon.ai/stable/
