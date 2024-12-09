@@ -65,7 +65,7 @@ test:
     - orjson
     - requests
     - holidays >=0.9,<1
-    - matplotlib >=3.6,<4
+    - matplotlib-base >=3.6,<4
   commands:
     - pip check
     ## Torch tests to check pytorch-lightning bounds are OK ##
