@@ -40,7 +40,8 @@ requirements:
     # the "torch" extra by default in the runtime requirements. So we
     # can't remove that dependency without breaking all our users.
     - pytorch >=1.9,<3
-    - lightning >=2.0,<2.2
+    # Relax upperbound to match autogluon-timeseries
+    - lightning >=2.0,<2.4
     # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
     # Relax upperbound to match autogluon-timeseries
     - pytorch-lightning >=2.0,<2.4
