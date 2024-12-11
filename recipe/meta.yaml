@@ -13,7 +13,7 @@ source:
     - patches/0001-remove-mqf2-cpflows-tests-in-torch.patch
 
 build:
-  number: 0
+  number: 1
   # skipping s390x because lightning is not available
   skip: true  # [py<37 or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
@@ -40,7 +40,8 @@ requirements:
     # the "torch" extra by default in the runtime requirements. So we
     # can't remove that dependency without breaking all our users.
     - pytorch >=1.9,<3
-    - lightning >=2.0,<2.2
+    # Relax upperbound to match autogluon-timeseries
+    - lightning >=2.0,<2.4
     # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
     # Relax upperbound to match autogluon-timeseries
     - pytorch-lightning >=2.0,<2.4
