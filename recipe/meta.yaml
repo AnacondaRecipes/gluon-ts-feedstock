@@ -1,5 +1,5 @@
 {% set name = "gluonts" %}
-{% set version = "0.16.0" %}
+{% set version = "0.16.2" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 706ae751566f57c8405c604b9d1531652de2237a55f27a004612498d90212918
+  sha256: 1fef7fff186b567edf9db7cd052c10ee82fb74bb4b4914b925340ba33d494548
   patches:
     # remove test cases that rely on cpflows extra
     - patches/0001-remove-mqf2-cpflows-tests-in-torch.patch
@@ -92,14 +92,14 @@ test:
     - pytest ./test -vv -k "not (test_estimator_constant_dataset or test_estimator_with_features or test_arrow or test_dataset_writer or test_custom_neg_bin_logpdf_matches_scipy_neg_bin_logpdf)"  # [win]
 
 about:
-  home: https://ts.gluon.ai/stable/
+  home: https://ts.gluon.ai/stable
   license: Apache-2.0
   license_family: Apache
   license_file:
     - NOTICE
     - LICENSE
   dev_url: https://github.com/awslabs/gluonts
-  doc_url: https://ts.gluon.ai/stable/
+  doc_url: https://ts.gluon.ai/stable
   summary: GluonTS is a Python toolkit for probabilistic time series modeling, built around Apache MXNet (incubating).
   description: |
     GluonTS is a Python package for probabilistic time series modeling, focusing on deep learning based models, based
