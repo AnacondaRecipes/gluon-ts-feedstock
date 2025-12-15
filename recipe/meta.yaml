@@ -66,6 +66,9 @@ requirements:
   "--ignore=test/ext/r_forecast/test_r_multi_seasonality.py",
   "--ignore=test/ext/r_forecast/test_r_univariate_predictor.py",
   "--ignore=test/torch_tests/distribution/test_negative_binomial.py",
+  # PermissionError: [WinError 32] The process cannot access the file because it is being used by another process
+  "--ignore=test/dataset/test_arrow.py",
+  "--ignore=test/dataset/test_writer.py",
   "--ignore=test/ext/r_forecast/test_r_util.py"
 ]%}
 test:
