@@ -89,7 +89,8 @@ test:
     # MPS Fallback must be enabled on OSX, see https://github.com/awslabs/gluonts/issues/3020
     - export PYTORCH_ENABLE_MPS_FALLBACK=1  # [osx]
     # Rename torch test directory to avoid confusion with torch module
-    - mv test/torch test/torch_tests
+    - mv test/torch test/torch_tests  # [unix]
+    - move test\torch test\torch_tests\  # [win]
     # Skip tests that throw errors in the C++ engine of a backwards training pass because they're calling view()
     # instead of reshape() on a tensor.
     - pytest ./test -vv {{ ignored_tests | join(" ")}}  # [not win]
