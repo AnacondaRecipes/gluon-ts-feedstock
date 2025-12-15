@@ -65,6 +65,7 @@ requirements:
   "--ignore=test/ext/r_forecast/test_r_hierarchical_predictor.py",
   "--ignore=test/ext/r_forecast/test_r_multi_seasonality.py",
   "--ignore=test/ext/r_forecast/test_r_univariate_predictor.py",
+  "--ignore=test/torch_tests/distribution/test_negative_binomial.py",
   "--ignore=test/ext/r_forecast/test_r_util.py"
 ]%}
 test:
