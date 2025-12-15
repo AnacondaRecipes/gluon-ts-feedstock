@@ -60,7 +60,13 @@ requirements:
   "--ignore=test/torch_tests/model/test_torch_incremental_training.py",
   "--ignore=test/torch_tests/model/test_estimators.py"
 ]%}
-
+# FileNotFoundError: [WinError 2] The system cannot find the file specified
+{% set ignored_win_tests = [
+  "--ignore=test/ext/r_forecast/test_r_hierarchical_predictor.py",
+  "--ignore=test/ext/r_forecast/test_r_multi_seasonality.py",
+  "--ignore=test/ext/r_forecast/test_r_univariate_predictor.py",
+  "--ignore=test/ext/r_forecast/test_r_util.py"
+]%}
 test:
   source_files:
     - test
@@ -97,7 +103,7 @@ test:
     # Windows has additional trouble running arrow and datawriter tests since multiple threads try to open the same
     # file at the same time. Windows also gets different results when comparing their implementation of a
     # NegativeBinomial distribution vs scipy. See https://github.com/awslabs/gluonts/issues/3129
-    - pytest ./test -vv {{ ignored_tests | join(" ")}}  # [win]
+    - pytest ./test -vv {{ ignored_tests | join(" ")}} {{ ignored_win_tests | join (" ")}} # [win]
 
 about:
   home: https://ts.gluon.ai/stable
