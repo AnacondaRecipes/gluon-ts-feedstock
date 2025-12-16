@@ -38,12 +38,11 @@ requirements:
     # can't remove that dependency without breaking all our users.
     - pytorch >=1.9,<3
     # Tighten upperbound to match autogluon.timeseries 1.1.1
-    - lightning >=2.2.2,<2.4
+    - lightning >=2.2.2,<2.5
     # Capping `lightning` does not cap `pytorch_lightning`, so we cap manually
     # Tighten upperbound to match autogluon.timeseries 1.1.1
-    - pytorch-lightning >=2.2.2,<2.4
-    - scipy >=1.7.3,<1.8.0.dev0  # [py<38]
-    - scipy >=1.10,<2.0.0.dev0   # [py>37]
+    - pytorch-lightning >=2.2.2,<2.5
+    - scipy <1.16.0   # [py>37]
   run_constrained:
     # https://github.com/awslabs/gluonts/blob/v0.16.0/requirements/requirements-extras-prophet.txt
     - prophet >=1.0,<2.0.0.dev0
